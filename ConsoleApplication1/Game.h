@@ -1,60 +1,39 @@
 #pragma once
+#include "Player.h"
+#include <vector>
 
-#include<iostream>
-#include<vector>
 
-#include <SFML/Network.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
-#include <SFML/Network.hpp>
-
-	//Game engine
-
-class Game
+class Game 
 {
-private:
-	//Variables
-
-	//Window
-	sf::RenderWindow* window;
-	sf::VideoMode videoMode;
-	sf::Event ev;
-
-	//Mouse Position
-	sf::Vector2i mouseposWindow;
-	sf::Vector2f mousePosView;
-
-	//Game Logic
-	int points;
-	float enemySpawnTimer;
-	float enemySpawnTimerMax;
-	int maxEnemies;
-
-	//Game objects
-	std::vector<sf::RectangleShape> enemies;
-	sf::RectangleShape enemy;
-	
-
-	//Private functions
-	void initVariables();
-	void initWindow();
-	void initEnemies();
 public:
-	// Constructor/Destructor
-		Game();
-		virtual ~Game();
-	
-	//Accessors
-		const bool getWindowIsOpen() const;
+	Game();
 
-	//Functions
-		void spawnEnemy();
-		void pollEvents();
-		void update();
-		void updateEnemy();
-		void render();
-		void renderEnemy();
-		void updateMousePos();
+	void run();
+
+
+	void clearNoActive();
+
+	sf::Texture m_texture;
+
+	const sf::Vector2u getWindowSize() const {
+		return m_window->getSize();
+	}
+
+	void addobject(GameObject* object);
+
+private:
+
+	void insertQueue();
+
+	void clear();
+
+	void updateCollision();
+
+	std::vector<GameObject*> m_container;
+
+	std::vector<GameObject*> m_queue;
+
+	sf::RenderWindow* m_window;
+
+	bool m_cleaned;
 };
-
