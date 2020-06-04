@@ -1,6 +1,6 @@
 #include "Game.h"
 #include "Background.h"
-
+#include "Enemy.h"
 Game::Game()
 	:m_cleaned(true)
 {
@@ -34,6 +34,12 @@ void Game::run()
 	m_bullet.loadFromFile("Graphic/bullet.png");
 	
 	// set
+
+	Enemy enemy(this, 50.f);
+	enemy.setTexture(m_enemy1);
+	enemy.setScale(sf::Vector2f(0.2f, 0.2f));
+	enemy.rotate(180);
+
 	Background back;
 	back.setTexture(tex);
 	back.adjust(m_window);
@@ -48,6 +54,7 @@ void Game::run()
 	//insert
 	m_container.push_back(&back);
 	m_container.push_back(player);
+	m_container.push_back(&enemy);
 
 	sf::Clock clock;
 	float frameStartTime;
@@ -136,10 +143,26 @@ void Game::clear()
 
 void Game::updateCollision()
 {
-	//get sprite
-	// jesli a koliduje z b
+    
+	
+	for (auto it1 = m_container.begin(); it1 != m_container.end(); ++it1)
+	{
+		for (auto it2 = m_container.begin(); it2 != m_container.end(); ++it2)
+		{
+			if(it1 != it2)
+			{
+				auto& s1 = (*it1)->getSprite();
+				auto& s2 = (*it2)->getSprite();
 
-	// a->onCollision(b)
-	// b->onCollision(a)
+				auto rect1 = s1.getGlobalBounds();
+				auto rect2 = s2.getGlobalBounds();
 
+				
+				if(rect1.intersects(rect2)){
+					(*it1)->onColliosion(*it2);
+					(*it2)->onColliosion(*it1);
+				}
+			}
+		}
+	}
 }

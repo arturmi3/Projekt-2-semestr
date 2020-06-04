@@ -28,9 +28,12 @@ public:
 		m_scale = sca;
 	}
 
-	virtual void update(const float& deltaTime) 
-	{
+	virtual void update(const float& deltaTime) = 0;
 
+	virtual void setOrigin(const sf::Vector2f& origin)
+	{
+		m_sprite.setOrigin(origin);
+		m_origin = origin;
 	}
 
 	virtual void move(const sf::Vector2f& delta)
@@ -85,12 +88,21 @@ public:
 	{
 		m_tag = tag;
 	}
+	virtual const sf::Vector2f& getOrigin() const {
+		return m_origin;
+	}
+
+	virtual void rotate(const float dgr)
+	{
+		m_sprite.rotate(dgr);
+	}
 
 protected:
 	std::string m_tag;
 	sf::Vector2f m_position;
 	sf::Vector2f m_scale;
 	sf::Sprite m_sprite;
+	sf::Vector2f m_origin;
 	bool m_isActive;
 	Game* m_game;
 };

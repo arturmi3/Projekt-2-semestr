@@ -11,6 +11,8 @@ public:
 	{};
 	~Background() = default;
 
+	void update(const float& deltaTime) {};
+
 private:
 
 };
