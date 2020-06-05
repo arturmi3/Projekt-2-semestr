@@ -15,7 +15,7 @@ void Game::run()
 
 	// load
 	sf::Texture tex;
-	tex.loadFromFile("to.png");
+	tex.loadFromFile("Graphic/tuo.png");
 	sf::Texture m_player;
 	m_player.loadFromFile("Graphic/1.png");
 	sf::Texture m_enemy1;
