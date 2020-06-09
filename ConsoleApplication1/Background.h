@@ -2,10 +2,8 @@
 #include "GameObject.h"
 class Background : public GameObject
 {
-	
-
 public:
-	void adjust(sf::RenderWindow* target);
+	void adjust(const sf::Vector2f& target);
 
 	Background() : GameObject(nullptr)
 	{};

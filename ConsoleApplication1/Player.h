@@ -7,6 +7,7 @@ public:
 	Player(Game* game)
 		:GameObject(game), m_bulletTexture(nullptr)
 	{
+		m_tag = "Player";
 	};
 
 	virtual void update(const float& deltaTime);

@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObject.h"
-
+#include "Game.h"
 class bullet : public GameObject
 {
 public:
@@ -13,6 +13,7 @@ public:
 
 	virtual void update(const float& deltaTime);
 
+	virtual void onColliosion(GameObject* ptr);
 
 protected:
 	sf::Vector2f m_direction;
