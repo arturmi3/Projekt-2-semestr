@@ -14,5 +14,10 @@ void bullet::update(const float& deltaTime)
 
 void bullet::onColliosion(GameObject* ptr)
 {
-
+	if (ptr->getTag() == "Enemy")
+	{
+		remove();
+		m_game->clearNoActive();
+		return;
+	}
 }

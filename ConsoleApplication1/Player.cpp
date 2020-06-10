@@ -8,14 +8,14 @@ void Player::update(const float& deltaTime)
 	{
 		if (m_position.x + m_sprite.getTexture()->getSize().x * m_scale.x < m_game->getView().getSize().x)
 		{ 
-			move(sf::Vector2f(250 * deltaTime, 0)); 
+			move(sf::Vector2f(300 * deltaTime, 0)); 
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
 		if (m_position.x > 0)
 		{
-			move(sf::Vector2f(-250 * deltaTime, 0));
+			move(sf::Vector2f(-300 * deltaTime, 0));
 		}
 	}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))

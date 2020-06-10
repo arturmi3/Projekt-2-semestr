@@ -58,28 +58,28 @@ void Game::run()
 
 	// difficult
 	//m_difficultLevel
-	Spawner* spawner = new Spawner(2, 4, this);
+	Spawner* spawner = new Spawner(2, 4, 80.f, 250.f, this);
 	spawner->setEnemyTexture(m_enemy1);
-	spawner->setEnemySpeed(200);
-	spawner->setPosition(sf::Vector2f(80, 0));
+	spawner->setEnemySpeed(150);
+	spawner->setPosition(sf::Vector2f(0, 0));
 	m_container.push_back(spawner);
 
-	spawner = new Spawner(2, 6, this);
+	spawner = new Spawner(2, 6, 260.f, 350.f, this);
 	spawner->setEnemyTexture(m_enemy1);
-	spawner->setEnemySpeed(200);
-	spawner->setPosition(sf::Vector2f(250, 0));
+	spawner->setEnemySpeed(150);
+	spawner->setPosition(sf::Vector2f(0, 0));
 	m_container.push_back(spawner);
 
-	spawner = new Spawner(2, 6, this);
+	spawner = new Spawner(2, 6, 360.f, 590.f, this);
 	spawner->setEnemyTexture(m_enemy1);
-	spawner->setEnemySpeed(200);
-	spawner->setPosition(sf::Vector2f(350, 0));
+	spawner->setEnemySpeed(150);
+	spawner->setPosition(sf::Vector2f(0, 0));
 	m_container.push_back(spawner);
 
-	spawner = new Spawner(2, 6, this);
+	spawner = new Spawner(2, 6, 600.f, m_view.getSize().x, this);
 	spawner->setEnemyTexture(m_enemy1);
-	spawner->setEnemySpeed(200);
-	spawner->setPosition(sf::Vector2f(500, 0));
+	spawner->setEnemySpeed(150);
+	spawner->setPosition(sf::Vector2f(0, 0));
 	m_container.push_back(spawner);
 
 
@@ -174,24 +174,19 @@ void Game::clear()
 {
 	if (!m_container.empty())
 	{
-		auto k = [](GameObject* obj)->bool 
+		for (auto it = m_container.begin(); it != m_container.end(); )
 		{
-			return !(obj->isActive());
-		};
-
-		auto it = std::remove_if(m_container.begin(), m_container.end(), k);
-
-		auto it1 = it;
-
-		if (it1 != m_container.end())
-		{
-			++it1;
-			for (; it1 != m_container.end(); ++it1)
+			GameObject const* p = (GameObject*)(*it);
+			if (p->isActive())
 			{
-				delete (*it1);
+				it++;
 			}
-
-			m_container.erase(it, m_container.end());
+			else
+			{
+				it = m_container.erase(it);
+				if (p->getTag() == "PlayerBullet")
+					delete (p);
+			}
 		}
 	}
 	m_cleaned = true;

@@ -4,7 +4,7 @@
 class Spawner : public GameObject
 {
 public:
-	Spawner(int mtime, int mxtime, Game* game);
+	Spawner(int mtime, int mxtime, float minPosition, float maxPosition, Game* game);
 
 	virtual void update(const float& deltaTime);
 
@@ -20,7 +20,8 @@ protected:
 	int minTime;
 	int maxTime;
 	float resptime;
+	float minPosition;
+	float maxPosition;
 	sf::Texture enemyTexture;
 	float speed;
 };
-
