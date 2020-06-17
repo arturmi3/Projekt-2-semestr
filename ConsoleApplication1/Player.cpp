@@ -36,7 +36,7 @@ void Player::update(const float& deltaTime)
 				k->setOrigin(sf::Vector2f(8.f, 8.f));
 				k->setPosition(sf::Vector2f(m_position.x + v.x, m_position.y+v.y));
 				m_game->addobject(k);
-				//remove();
+				//remove();benisssssssssssssssssssssssssssss
 				//m_game->clearNoActive();
 				reload = false;
 			}
